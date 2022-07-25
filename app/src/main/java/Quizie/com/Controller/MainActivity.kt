@@ -47,9 +47,10 @@ class MainActivity : AppCompatActivity() {
     var numberOfTimesUserAnsweredInCorrectly: Int = 0
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) { // this func is called whenever this activity is called
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        setContentView(R.layout.activity_main) // put activity_main.xml on mobile screen
         setSupportActionBar(findViewById(R.id.toolbar))
 
       //  progressBar.setVisibility(View.GONE)
@@ -211,6 +212,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class DownloadingPlantTask: AsyncTask<String, Int, List<Plant>>(){
+        // creating a inner class -> a class within a class ... this inner class can access members of its parent class
+        // but parent class members cant access inner class members
+
+        // we're making an inner class because we want to keep our background and UI threads separate, so that it doesnt interfere and app doesnt crash
+        // like while downloading from internet, this process should only happen in background and not come in UI
+
+        // DowloadingPlantTask is inheriting from AsyncTask
+        // Int -> this shows % of download
+        // List<Plant> -> return type
 
         override fun doInBackground(vararg params: String?): List<Plant>?{
             // can access background thread, not user interface thread
